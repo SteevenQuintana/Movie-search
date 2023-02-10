@@ -33,7 +33,7 @@ const useSearch = () => {
 
 function App() {
   const { query, setQuery, error } = useSearch();
-  const { movies, getMovies } = useMovies({ query });
+  const { movies, getMovies, isLoading } = useMovies({ query });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,9 +63,7 @@ function App() {
         {error && <p style={{ color: "red" }}> {error}</p>}
       </header>
 
-      <main>
-        <Movies movies={movies} />
-      </main>
+      <main>{isLoading ? <p>Loading...</p> : <Movies movies={movies} />}</main>
     </div>
   );
 }

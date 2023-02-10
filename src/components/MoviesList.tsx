@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Movie {
+export interface Movie {
   id: string;
   title: string;
   year: string;
