@@ -8,10 +8,44 @@
 main {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 form {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.movies {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.movie h3,
+.movie p {
+  margin: 0;
+}
+.movie h3 {
+  padding-top: 24px;
+}
+.movie img {
+  border-radius: 12px;
+  box-shadow: 10px 20px 40px -22px var(--selection);
+  margin-top: 12px;
+}
+.movie img:hover {
+  cursor: pointer;
+  box-shadow: 0px 20px 40px -14px var(--selection);
 }
