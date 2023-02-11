@@ -32,12 +32,17 @@ const useSearch = () => {
 };
 
 function App() {
+  const [sort, setSort] = useState(false);
   const { query, setQuery, error } = useSearch();
-  const { movies, getMovies, isLoading } = useMovies({ query });
+  const { movies, getMovies, isLoading } = useMovies({ query, sort });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    getMovies();
+    getMovies(query);
+  };
+
+  const handleSort = () => {
+    setSort(!sort);
   };
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +63,15 @@ function App() {
             type="text"
             placeholder="Avengers, Star Wars, The Matrix..."
           />
+
           <button type="submit">Search</button>
+          <button
+            disabled={movies?.length === 0}
+            onClick={handleSort}
+            type="button"
+          >
+            {!sort ? "Sort by title" : "Sort by default"}
+          </button>
         </form>
         {error && <p style={{ color: "red" }}> {error}</p>}
       </header>
