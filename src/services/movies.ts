@@ -1,13 +1,13 @@
 interface Query {
   query: string;
 }
-const API_KEY = "e73cfdb4";
+const { VITE_API_KEY, VITE_BASE_URL } = import.meta.env;
 
 export const searchMovies = async ({ query }: Query) => {
   if (query === "") return null;
   try {
     const response = await fetch(
-      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`
+      `${VITE_BASE_URL}?apikey=${VITE_API_KEY}&s=${query}`
     );
     if (!response.ok) {
       throw new Error("Something went wrong");

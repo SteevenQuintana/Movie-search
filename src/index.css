@@ -5,7 +5,7 @@
  */
 
 :root {
-  --background-body: #fff;
+  --background-body: #e4e4e4;
   --background: #efefef;
   --background-alt: #f7f7f7;
   --selection: #9e9e9e;
@@ -30,20 +30,20 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-body: #202b38;
-    --background: #161f27;
-    --background-alt: #1a242f;
-    --selection: #1c76c5;
+    --background-body: #0d1116;
+    --background: #20262d;
+    --background-alt: #292929;
+    --selection: #0ca581;
     --text-main: #dbdbdb;
     --text-bright: #fff;
     --text-muted: #a9b1ba;
     --links: #41adff;
-    --focus: #0096bfab;
+    --focus: #96b2d2;
     --border: #526980;
     --code: #ffbe85;
     --animation-duration: 0.1s;
-    --button-base: #0c151c;
-    --button-hover: #040a0f;
+    --button-base: #0ca581;
+    --button-hover: #1e3f3e;
     --scrollbar-thumb: var(--button-hover);
     --scrollbar-thumb-hover: rgb(0, 0, 0);
     --form-placeholder: #a9a9a9;
@@ -426,7 +426,6 @@ input {
   margin-right: 6px;
   margin-bottom: 6px;
   padding: 10px;
-  border: none;
   border-radius: 6px;
   outline: none;
 }
@@ -668,6 +667,7 @@ select,
 button,
 textarea {
   -webkit-appearance: none;
+  appearance: none;
 }
 
 textarea {

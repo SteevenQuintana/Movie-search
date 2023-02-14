@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState, useMemo, useCallback } from "react";
 import { Movie } from "../components/MoviesList";
 import { searchMovies } from "../services/movies";
 
@@ -12,18 +12,16 @@ export const useMovies = ({ query, sort }: Query) => {
   const [isLoading, setIsLoading] = useState(false);
   const previusQuery = useRef(query);
 
-  const getMovies = useMemo(() => {
-    return async (query: string) => {
-      if (query === previusQuery.current) return;
-      try {
-        setIsLoading(true);
-        previusQuery.current = query;
-        const newMovies = await searchMovies({ query });
-        setMovies(newMovies);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const getMovies = useCallback(async (query: string) => {
+    if (query === previusQuery.current) return;
+    try {
+      setIsLoading(true);
+      previusQuery.current = query;
+      const newMovies = await searchMovies({ query });
+      setMovies(newMovies);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   const sortedMovies = useMemo(() => {

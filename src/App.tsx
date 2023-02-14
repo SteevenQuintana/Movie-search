@@ -3,33 +3,7 @@ import "./App.css";
 
 import { Movies } from "./components/MoviesList";
 import { useMovies } from "./hooks/useMovies";
-
-const useSearch = () => {
-  const [query, setQuery] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const isFisrtInput = useRef(true);
-
-  useEffect(() => {
-    if (isFisrtInput.current) {
-      isFisrtInput.current = query === "";
-      return;
-    }
-
-    if (query.trim() === "") {
-      setError("Can't search empty movie");
-      return;
-    }
-
-    if (query.length < 3) {
-      setError("search must have at least 3 characters");
-      return;
-    }
-
-    setError(null);
-  }, [query]);
-
-  return { query, setQuery, error };
-};
+import { useSearch } from "./hooks/useSearch";
 
 function App() {
   const [sort, setSort] = useState(false);
@@ -51,6 +25,19 @@ function App() {
     setQuery(newQuery);
   };
 
+  useEffect(() => {
+    if (query.trim() === "") return;
+    const timer = setTimeout(() => {
+      getMovies(query);
+    }, 350);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  useEffect(() => {
+    setQuery("Movies...");
+  }, []);
+
   return (
     <div className="page">
       <header>
@@ -64,7 +51,7 @@ function App() {
             placeholder="Avengers, Star Wars, The Matrix..."
           />
 
-          <button type="submit">Search</button>
+          <button type="submit">🔍 Search</button>
           <button
             disabled={movies?.length === 0}
             onClick={handleSort}
